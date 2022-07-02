@@ -3,15 +3,9 @@
 import { h, Fragment } from "preact";
 import { tw } from "@twind";
 import { Head } from "$fresh/runtime.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 
-const TITLE = "Thomas Francis - full stack web developer portfolio";
-const NAV_LINKS = ["Resume", "Blog", "Project"];
-const EDUCATION = [
-  "Holberton (Full Stack Web Development), Sept. 2022",
-  "AWS Developer - Associate Certified, Aug. 2022",
-  "University of Connecticut (B.S. Chemistry), 2018",
-];
-type TechCategory = {
+type TechCategoryType = {
   category:
     | "Design"
     | "Frontend"
@@ -22,62 +16,28 @@ type TechCategory = {
     | "Languages";
   tech: string[];
 };
-const TECH_STACK: TechCategory[] = [
-  {
-    category: "Design",
-    tech: ["Figma"],
+type CertificationType = {
+  institution: string;
+  data: string;
+};
+interface Data {
+  education: CertificationType[];
+  techStack: TechCategoryType[];
+}
+export const handler: Handlers<Data> = {
+  async GET(req, ctx) {
+    const url = new URL(req.url + "data.json");
+    const response = await fetch(url);
+    console.log(await response.json())
+    const result: Data = await response.json();
+    return ctx.render(result);
   },
-  {
-    category: "Frontend",
-    tech: [
-      "Apollo",
-      "Bootstrap",
-      "Deno",
-      "Fresh",
-      "Gatsby",
-      "NPM",
-      "NodeJS",
-      "React",
-      "Redux",
-      "TailwindCSS",
-      "Vite",
-      "Webpack",
-      "Yarn",
-      "jQuery",
-    ],
-  },
-  {
-    category: "Backend(-ish)",
-    tech: ["Django + Django REST APIs", "Express", "GraphQL"],
-  },
-  {
-    category: "Database",
-    tech: ["MongoDB", "PostgreSQL", "Redis", "SQLite"],
-  },
-  {
-    category: "Deployment",
-    tech: ["AWS", "Apache", "Deno Deploy", "Docker", "Gatsby Cloud", "Nginx"],
-  },
-  {
-    category: "Testing",
-    tech: ["Jest", "Python Unit Tests", "React Testing Library", "Selenium"],
-  },
-  {
-    category: "Languages",
-    tech: [
-      "Bash (Linux)",
-      "C",
-      "C#",
-      "JavaScript",
-      "PL/SQL",
-      "PostgreSQL",
-      "Python",
-      "TypeScript",
-    ],
-  },
-];
+};
 
-export default function Home() {
+const TITLE = "Thomas Francis - full stack web developer portfolio";
+const NAV_LINKS = ["Resume", "Blog", "Project"];
+
+export default function Home({ data }: PageProps<Data>) {
   return (
     <>
       <Head>
@@ -104,7 +64,7 @@ export default function Home() {
             <div>my github avatar image</div>
             {/** sub title */}
             <ul>
-              {EDUCATION.map((item) => (
+              {data.education.map((item: CertificationType) => (
                 <li>{item}</li>
               ))}
             </ul>
@@ -114,7 +74,7 @@ export default function Home() {
           <div>
             <table>
               <tbody>
-                {TECH_STACK.map((item: TechCategory) => {
+                {data.techStack.map((item: TechCategoryType) => {
                   return (
                     <tr>
                       <td>{item.category}</td>
@@ -134,9 +94,7 @@ export default function Home() {
           {/** Portfolio Item 3 */}
         </section>
         {/** Single Resume */}
-        <section>
-          Single Resume Button
-        </section>
+        <section>Single Resume Button</section>
       </main>
       {/** Footer */}
       <footer>

@@ -1,0 +1,93 @@
+{
+    "education": [
+        {
+            "institution": "Holberton (Full Stack Web Development)",
+            "date": "Sept. 2022"
+        },
+        {
+            "institution": "AWS Developer - Associate Certified",
+            "date": "Aug. 2022"
+        },
+        {
+            "institution": "University of Connecticut (B.S. Chemistry)",
+            "date": "2018"
+        }
+    ],
+    "techStack": [
+        {
+            "category": "Design",
+            "tech": [
+                "Figma"
+            ]
+        },
+        {
+            "category": "Frontend",
+            "tech": [
+                "Apollo",
+                "Bootstrap",
+                "Deno",
+                "Fresh",
+                "Gatsby",
+                "NPM",
+                "NodeJS",
+                "React",
+                "Redux",
+                "TailwindCSS",
+                "Vite",
+                "Webpack",
+                "Yarn",
+                "jQuery"
+            ]
+        },
+        {
+            "category": "Backend(-ish)",
+            "tech": [
+                "Django + Django REST APIs",
+                "Express",
+                "GraphQL"
+            ]
+        },
+        {
+            "category": "Database",
+            "tech": [
+                "MongoDB",
+                "PostgreSQL",
+                "Redis",
+                "SQLite"
+            ]
+        },
+        {
+            "category": "Deployment",
+            "tech": [
+                "AWS",
+                "Apache",
+                "Deno Deploy",
+                "Docker",
+                "Gatsby Cloud",
+                "Nginx"
+            ]
+        },
+        {
+            "category": "Testing",
+            "tech": [
+                "Jest",
+                "Python Unit Tests",
+                "React Testing Library",
+                "Selenium"
+            ]
+        },
+        {
+            "category": "Languages",
+            "tech": [
+                "Bash (Linux)",
+                "C",
+                "C#",
+                "JavaScript",
+                "PL/SQL",
+                "PostgreSQL",
+                "Python",
+                "TypeScript"
+            ]
+        }
+    ]
+}
