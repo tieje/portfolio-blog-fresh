@@ -1,43 +1,15 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
+import MY_INFO from "../data/my_info.json" assert { type: "json" };
+import { Certification, TechCategory } from "../data/myInfo.ts";
 import { h, Fragment } from "preact";
 import { tw } from "@twind";
 import { Head } from "$fresh/runtime.ts";
-import { Handlers, PageProps } from "$fresh/server.ts";
-
-type TechCategoryType = {
-  category:
-    | "Design"
-    | "Frontend"
-    | "Backend(-ish)"
-    | "Database"
-    | "Deployment"
-    | "Testing"
-    | "Languages";
-  tech: string[];
-};
-type CertificationType = {
-  institution: string;
-  data: string;
-};
-interface Data {
-  education: CertificationType[];
-  techStack: TechCategoryType[];
-}
-export const handler: Handlers<Data> = {
-  async GET(req, ctx) {
-    const url = new URL(req.url + "data.json");
-    const response = await fetch(url);
-    console.log(await response.json())
-    const result: Data = await response.json();
-    return ctx.render(result);
-  },
-};
 
 const TITLE = "Thomas Francis - full stack web developer portfolio";
 const NAV_LINKS = ["Resume", "Blog", "Project"];
 
-export default function Home({ data }: PageProps<Data>) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -64,8 +36,8 @@ export default function Home({ data }: PageProps<Data>) {
             <div>my github avatar image</div>
             {/** sub title */}
             <ul>
-              {data.education.map((item: CertificationType) => (
-                <li>{item}</li>
+              {MY_INFO.education.map((edu: Certification) => (
+                <li>{edu}</li>
               ))}
             </ul>
             <p>my github description</p>
@@ -74,11 +46,11 @@ export default function Home({ data }: PageProps<Data>) {
           <div>
             <table>
               <tbody>
-                {data.techStack.map((item: TechCategoryType) => {
+                {MY_INFO.techStack.map((tech: TechCategory) => {
                   return (
                     <tr>
-                      <td>{item.category}</td>
-                      <td>{item.tech.join(", ")}</td>
+                      <td>{tech.category}</td>
+                      <td>{tech.tech.join(", ")}</td>
                     </tr>
                   );
                 })}
