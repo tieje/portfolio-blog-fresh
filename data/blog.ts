@@ -1,13 +1,14 @@
 import RAW_BLOG from "../blog/blog.json" assert { type: "json" };
-export type BlogPost = {
+export interface BlogPost {
+  file: string;
   title: string;
   tags: string[];
   href: string;
   date_posted: string;
   last_edited: string;
-};
-export type RawB
-export const TABLE_OF_CONTENTS: BlogPost["href"][] = [];
-RAW_BLOG<BlogPost[]>.posts.forEach((post: BlogPost) => {
-  TABLE_OF_CONTENTS.push(post.href);
+}
+export const TABLE_OF_CONTENTS: Record<BlogPost["href"], BlogPost> = {};
+
+RAW_BLOG.posts.forEach((post: BlogPost) => {
+  TABLE_OF_CONTENTS[post.href] = post;
 });
