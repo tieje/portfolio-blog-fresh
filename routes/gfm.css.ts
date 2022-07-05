@@ -4,8 +4,8 @@ import { gfm } from "../utils/markdown.ts";
 // TODO(lucacasonato): hash the file and use the hash as the filename, and serve
 // with high-cacheability headers.
 
-const CSS = `${gfm.CSS}`;
-/*
+//const CSS = `${gfm.CSS}`;
+const CSS = `${gfm.CSS}
 ol.nested {
     counter-reset: item;
 }
@@ -35,7 +35,7 @@ ol.nested li:before {
     display: block;
 }
 `;
-*/
+
 export const handler: Handlers = {
   GET: () => {
     return new Response(CSS, {

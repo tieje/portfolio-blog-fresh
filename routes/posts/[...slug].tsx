@@ -41,29 +41,41 @@ export const handler: Handlers<Data> = {
       markdown: content,
       data: data ?? {},
     };
+
     const resp = ctx.render({ page });
     return resp;
   },
 };
 
 export default function BlogPostsPage(props: PageProps<Data>) {
+  const body = tw`mt-6`;
+  const html = gfm.render(props.data.page.markdown);
+  let description;
+  if (props.data.page.data.metadata) {
+    description = props.data.page.data.metadata;
+  }
   return (
     <>
       <Head>
         <title>"{props.data.page.title}" by Thomas Francis</title>
+        <link rel="stylesheet" href={`/gfm.css?build=${__FRSH_BUILD_ID}`} />
         {/** Must use @ts-ignore pragma since I can't be bothered add additional xyz attribute to Preact's Intrinsic Attributes*/}
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@animxyz/core"
-        ></link>
+        />
+        {description && <meta name="description" content={description} />}
       </Head>
       <main>
         {/** Header */}
         {/** Navigation */}
         {/** Body */}
+        <div
+          class={`${body} markdown-body`}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
         {/** Footer */}
       </main>
     </>
   );
 }
-
