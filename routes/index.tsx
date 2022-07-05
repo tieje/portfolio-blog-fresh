@@ -1,12 +1,10 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
-import MY_INFO from "../data/my_info.json" assert { type: "json" };
-import { Certification, TechCategory } from "../data/myInfo.ts";
 import { h, Fragment } from "preact";
 import { tw } from "@twind";
 import { Head } from "$fresh/runtime.ts";
 
-const TITLE = "Thomas Francis - full stack web developer portfolio";
+const TITLE = "Thomas Francis - frontpage";
 const NAV_LINKS = ["Resume", "Blog", "Project"];
 
 export default function Home() {
@@ -31,44 +29,8 @@ export default function Home() {
               ))}
             </ul>
           </nav>
-          {/** My immediate profile section */}
-          <div>
-            <div>my github avatar image</div>
-            {/** sub title */}
-            <ul>
-              {MY_INFO.education.map((edu: Certification) => (
-                <li>{edu}</li>
-              ))}
-            </ul>
-            <p>my github description</p>
-          </div>
-          {/** My Tech Stack */}
-          <div>
-            <table>
-              <tbody>
-                {MY_INFO.techStack.map((tech: TechCategory) => {
-                  return (
-                    <tr>
-                      <td>{tech.category}</td>
-                      <td>{tech.tech.join(", ")}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
         </header>
-        {/** Portfolio Items */}
-        <section>
-          Portfolio Items - use the github API
-          {/** Portfolio Item 1 */}
-          {/** Portfolio Item 2 */}
-          {/** Portfolio Item 3 */}
-        </section>
-        {/** Single Resume */}
-        <section>Single Resume Button</section>
       </main>
-      {/** Footer */}
       <footer>
         <div>Logo bottom left</div>
         {/** List of Links goes from Horizontal to vertical on Window size change */}
