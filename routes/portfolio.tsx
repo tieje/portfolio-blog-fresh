@@ -17,8 +17,7 @@ import { h, Fragment } from "preact";
 import { tw } from "@twind";
 import { Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import NavigationBar from "../components/Navigation/NavigationBar.tsx";
-import NavigationMenuButton from "../components/Navigation/NavigationMenuButton.tsx";
+import NavigationBar from "../islands/NavigationBar.tsx";
 
 const TITLE = "Full Stack Web Developer Portfolio";
 
@@ -62,7 +61,6 @@ export default function Home(props: PageProps<MyInfoType>) {
         {/** first section */}
         <header>
           {/** Navigation - this will simply be a button on mobile. The button will pull up a full screen nav link page*/}
-          <NavigationMenuButton />
           <NavigationBar active="/portfolio" />
           {/** My immediate profile section */}
           <div>

@@ -1,13 +1,17 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { h, Fragment } from "preact";
+import { useState, StateUpdater } from "preact/hooks";
 import { tw } from "@twind";
 import { Head } from "$fresh/runtime.ts";
+import Favicons from "../components/Favicons/Favicons.tsx";
 
 const TITLE = "Thomas Francis - frontpage";
 const NAV_LINKS = ["Resume", "Blog", "Project"];
 
 export default function Home() {
+  const [some, setSome] = useState(false);
+  console.log(some);
   return (
     <>
       <Head>
@@ -17,6 +21,7 @@ export default function Home() {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/@animxyz/core"
         ></link>
+        <Favicons />
       </Head>
       <main class={tw`flex flex-col min-h-screen bg-red-100`}>
         {/** first section */}
