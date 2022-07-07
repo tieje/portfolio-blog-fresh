@@ -28,6 +28,7 @@
                 "Deno",
                 "Fresh",
                 "Gatsby",
+                "jQuery",
                 "NPM",
                 "NodeJS",
                 "React",
@@ -35,12 +36,11 @@
                 "TailwindCSS",
                 "Vite",
                 "Webpack",
-                "Yarn",
-                "jQuery"
+                "Yarn"
             ]
         },
         {
-            "category": "Backend(-ish)",
+            "category": "Backend(ish)",
             "tech": [
                 "Django + Django REST APIs",
                 "Express",
