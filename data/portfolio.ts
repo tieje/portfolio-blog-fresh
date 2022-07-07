@@ -76,7 +76,6 @@ export const PORTFOLIO_REPOS = [
 ];
 // deno-lint-ignore no-explicit-any
 export function parseGitProject(data: any): GithubProjectsInfo {
-  const defaultURL = "http://www.example.org/";
   const info: GithubProjectsInfo = {
     name: data.name ?? "no name",
     description: data.description ?? "no description",
