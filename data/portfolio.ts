@@ -36,11 +36,11 @@ export interface GithubUserInfo {
   bio: string;
   name: string;
 }
-export interface GithubProjectsInfo {
+export interface GithubProjectInfo {
   name: string;
   description: string;
-  project_link?: URL;
-  github_link: URL;
+  project_url?: URL;
+  github_url: URL;
   topics: string[];
   role: "owner" | "contributor";
 }
@@ -50,7 +50,7 @@ export interface MyInfoType extends GithubUserInfo {
   LinkedIn: URL;
   Resume: URL;
   Portfolio: URL;
-  projects: GithubProjectsInfo[];
+  projects: GithubProjectInfo[];
 }
 const GITHUB_API_KEY = Deno.env.get("GITHUB_READ");
 const GITHUB_API_BASE_URL = new URL("https://api.github.com");
@@ -75,12 +75,12 @@ export const PORTFOLIO_REPOS = [
   "tieje/simple-lead-generator",
 ];
 // deno-lint-ignore no-explicit-any
-export function parseGitProject(data: any): GithubProjectsInfo {
-  const info: GithubProjectsInfo = {
+export function parseGitProject(data: any): GithubProjectInfo {
+  const info: GithubProjectInfo = {
     name: data.name ?? "no name",
     description: data.description ?? "no description",
-    project_link: data.homepage ? new URL(data.homepage) : undefined,
-    github_link: new URL(data.html_url),
+    project_url: data.homepage ? new URL(data.homepage) : undefined,
+    github_url: new URL(data.html_url),
     topics: data.topics,
     role: data.owner.login === "tieje" ? "owner" : "contributor",
   };
@@ -91,7 +91,7 @@ export function parseGitProject(data: any): GithubProjectsInfo {
 curl -i -H "Authorization: token x" "https://api.github.com/users/tieje/repos?name"
 curl -H "Authorization: token x" "https://api.github.com/repos/tieje/breadsauce"
 curl -H "Authorization: token x" "https://api.github.com/repos/hellenic/react-hexgrid"
-curl -i -H "Authorization: token x" "https://api.github.com/users/tieje/repos"
+curl -i -H "Authorization: token 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" "https://api.github.com/users/tieje/repos/hm"
 */
 /* Github API will have a response for repos in the form of the following.
 {

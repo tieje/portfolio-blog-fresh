@@ -4,9 +4,10 @@ import { h, Fragment } from "preact";
 import { tw } from "@twind";
 import { Head } from "$fresh/runtime.ts";
 import Favicons from "../components/Favicons/Favicons.tsx";
+import NavigationBar from "../islands/NavigationBar.tsx";
+import Footer from "../components/Footer.tsx";
 
 const TITLE = "Thomas Francis - frontpage";
-const NAV_LINKS = ["Resume", "Blog", "Project"];
 
 export default function Home() {
   return (
@@ -20,24 +21,17 @@ export default function Home() {
         ></link>
         <Favicons />
       </Head>
-      <main class={tw`flex flex-col min-h-screen bg-red-100`}>
-        {/** first section */}
-        <header>
-          {/** Navigation - this will simply be a button on mobile. The button will pull up a full screen nav link page*/}
-          <nav class={tw`w-full flex`}>
-            <ul>
-              {NAV_LINKS.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </nav>
+      <main class={tw`flex flex-col min-h-screen`}>
+        {/** Navigation */}
+        <NavigationBar active="/" />
+        {/** Header */}
+        <header
+          class={tw`flex flex-grow place-content-center`}
+        >
+          <h1 class={tw`text-6xl`}>UNDER CONSTRUCTION</h1>
         </header>
       </main>
-      <footer>
-        <div>Logo bottom left</div>
-        {/** List of Links goes from Horizontal to vertical on Window size change */}
-        <div>List of Links on the bottom right</div>
-      </footer>
+      <Footer />
     </>
   );
 }

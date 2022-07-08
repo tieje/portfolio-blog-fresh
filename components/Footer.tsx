@@ -28,7 +28,7 @@ const footerLinks: NavLinksType[] = [
 export default function Footer() {
   return (
     <footer
-      class={tw`relative md:static h-96 md:h-full md:py-5 bg-black text-white text-lg`}
+      class={tw`relative md:static h-96 md:h-full md:py-5 bg-black text-white`}
     >
       <div class={tw`absolute md:static bottom-3 w-full`}>
         <div class={tw`flex md:static text-right md:text-center`}>
@@ -39,7 +39,7 @@ export default function Footer() {
             }}
           />
           <ol
-            class={tw`mr-5 flex-grow md:flex md:justify-end md:pt-5 md:pb-2 md:gap-8`}
+            class={tw`mr-5 flex-grow md:flex md:justify-end md:pt-5 md:pb-2 md:gap-4`}
           >
             <NavItems props={{ NavLinks: footerLinks }} />
           </ol>

@@ -7,7 +7,8 @@ import { tw } from "@twind";
 import { frontMatter, gfm } from "../../utils/markdown.ts";
 import { BlogPost } from "../../data/blog.ts";
 import { TABLE_OF_CONTENTS } from "../../data/blog.ts";
-
+import NavigationBar from "../../islands/NavigationBar.tsx";
+import Footer from "../../components/Footer.tsx";
 interface Page extends BlogPost {
   markdown: string;
   data: Record<string, string>;
@@ -67,6 +68,9 @@ export default function BlogPostsPage(props: PageProps<Data>) {
         {description && <meta name="description" content={description} />}
       </Head>
       <main>
+        {/** Navigation */}
+        <NavigationBar active="/posts" />
+
         {/** Header */}
         {/** Navigation */}
         {/** Body */}
@@ -75,6 +79,7 @@ export default function BlogPostsPage(props: PageProps<Data>) {
           dangerouslySetInnerHTML={{ __html: html }}
         />
         {/** Footer */}
+        <Footer />
       </main>
     </>
   );

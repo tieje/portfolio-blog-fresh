@@ -14,7 +14,7 @@ import {
   PORTFOLIO_URL,
   PORTFOLIO_REPOS,
   parseGitProject,
-  GithubProjectsInfo,
+  GithubProjectInfo,
 } from "../data/portfolio.ts";
 import { Certification, TechCategory } from "../data/portfolio.ts";
 import { h, Fragment } from "preact";
@@ -38,20 +38,24 @@ export const handler: Handlers<MyInfoType> = {
         return fetch(url, GITHUB_AUTH);
       })
     );
-    const gitProjects: GithubProjectsInfo[] = [];
+    const gitProjects: GithubProjectInfo[] = [];
     for (const project of userProjectsResp) {
+      if (project.status === 404) {
+        continue;
+      }
       const jsonProject = await project.json();
       gitProjects.push(parseGitProject(jsonProject));
     }
     const MyInfo: MyInfoType = {
       education: MY_INFO.education,
       techStack: MY_INFO.techStack,
-      github_avatar_url: new URL(userData.avatar_url) ?? DEFAULT_GITHUB_AVATAR,
-      //github_avatar_url: DEFAULT_GITHUB_AVATAR,
-      github_profile: new URL(userData.html_url) ?? DEFAULT_GITHUB_PROFILE,
-      //github_profile: DEFAULT_GITHUB_PROFILE,
+      github_avatar_url: userData.avatar_url
+        ? new URL(userData.avatar_url)
+        : DEFAULT_GITHUB_AVATAR,
+      github_profile: userData.html_url
+        ? new URL(userData.html_url)
+        : DEFAULT_GITHUB_PROFILE,
       bio: userData.bio ?? DEFAULT_BIO,
-      //bio: userData.bio, // ?? DEFAULT_BIO,
       name: userData.name ?? "Thomas Francis",
       LinkedIn: LINKEDIN_URL,
       Resume: RESUME_URL,
@@ -76,46 +80,54 @@ export default function Home(props: PageProps<MyInfoType>) {
           href="https://cdn.jsdelivr.net/npm/@animxyz/core"
         ></link>
       </Head>
-      <main class={tw`flex flex-col min-h-screen bg-white gap-10`}>
-        {/** first section */}
-        <header class={tw`md:h-screen`}>
-          <NavigationBar active="/portfolio" />
-          {/** Navigation - this will simply be a button on mobile. The button will pull up a full screen nav link page*/}
-          {/** My immediate profile section */}
-          <section class={tw`my-10`}>
-            <div class={tw`px-5 py-5 grid grid-cols-1 gap-6 text-center`}>
+      <main class={tw`grid grid-cols-1 min-h-screen bg-white gap-10`}>
+        {/** Navigation */}
+        <NavigationBar active="/portfolio" />
+        {/** Header */}
+        <header class={tw`md:mb-32 w-screen grid place-content-center`}>
+          <div
+            class={tw`md:max-w-[900px] grid place-content-center md:grid-cols-2`}
+          >
+            {/** My immediate profile section */}
+            <section
+              class={tw`my-10 px-5 py-5 grid gap-10 text-center md:flex md:justify-right md:content-center md:cols-span-1 md:px-10 md:m-0`}
+            >
               {/** Github Image Avatar */}
-              <div class={tw`grid place-content-center`}>
-                <Avatar
-                  props={{
-                    name: props.data.name,
-                    img: props.data.github_avatar_url,
-                    tw: "rounded-full",
-                    WH: 150,
-                  }}
-                />
+              <div class={tw`grid grid-cols-1 gap-10 place-content-center`}>
+                <div class={tw`grid place-content-center`}>
+                  <Avatar
+                    props={{
+                      name: props.data.name,
+                      img: props.data.github_avatar_url,
+                      tw: "rounded-full",
+                      WH: 150,
+                    }}
+                  />
+                </div>
+                {/** Education */}
+                <ul>
+                  {props.data.education.map((edu: Certification) => {
+                    return (
+                      <li class={tw`text-xs font-semibold`}>
+                        {edu.institution} - {edu.date}
+                      </li>
+                    );
+                  })}
+                </ul>
+                {/** Subtitle Description */}
+                <p class={tw`text-sm`}>
+                  &emsp;<i>{props.data.bio}</i>
+                </p>
+                <article class={tw`grid gap-2 text-sm`}>
+                  <p class={tw`text-left font-semibold`}>
+                    &emsp;Where I am in my career:
+                  </p>
+                  <p class={tw``}>Landing my first web dev job.</p>
+                </article>
               </div>
-              {/** Education */}
-              <ul>
-                {props.data.education.map((edu: Certification) => {
-                  return (
-                    <li class={tw`text-xs`}>
-                      {edu.institution} - {edu.date}
-                    </li>
-                  );
-                })}
-              </ul>
-              {/** Subtitle Description */}
-              <p class={tw`text-left`}>&emsp;"{props.data.bio}"</p>
-              <p class={tw`text-left`}>
-                &emsp;<b>Where I am in my career:</b> Trying to land my first
-                web dev job.
-              </p>
-            </div>
-          </section>
-          {/** My Tech Stack */}
-          <div>
-            <table class={tw`grid grid-cols-1 gap-8`}>
+            </section>
+            {/** My Tech Stack */}
+            <table class={tw`grid grid-cols-1 gap-8 md:cols-span-1 text-sm`}>
               <thead class={tw` grid place-content-center`}>
                 <tr>
                   <th class={tw`text-2xl`} colSpan={2}>
@@ -127,11 +139,21 @@ export default function Home(props: PageProps<MyInfoType>) {
                 {props.data.techStack.map((tech: TechCategory) => {
                   return (
                     <tr>
-                      <td class={tw`border-r-2 border-black px-2 w-28`}>
+                      <td
+                        class={tw`border-r-2 border-black px-2 w-28 text-right`}
+                      >
                         {tech.category}
                       </td>
                       <td class={tw`border-black px-2`}>
-                        {tech.tech.join(", ")}
+                        {tech.tech.map((item: string) => {
+                          return (
+                            <button
+                              class={tw`border border-black rounded-full px-2 m-1 shadow-lg`}
+                            >
+                              {item}
+                            </button>
+                          );
+                        })}
                       </td>
                     </tr>
                   );
@@ -141,17 +163,76 @@ export default function Home(props: PageProps<MyInfoType>) {
           </div>
         </header>
         {/** Portfolio Items */}
-        <section class={tw``}>
-          Portfolio Items - use the github API
-          {/** Portfolio Item 1 */}
-          {/** Portfolio Item 2 */}
-          {/** Portfolio Item 3 */}
+        <section class={tw`grid place-content-center`}>
+          <h1 class={"text-3xl font-bold text-center"}>Projects</h1>
+          {props.data.projects.map((project: GithubProjectInfo) => {
+            return (
+              <div
+                class={tw`grid sm:grid-cols-1 md:grid-cols-3 my-10 gap-8 bg-yellow-100 px-7 py-5 mx-2 rounded-lg md:max-w-[900px] md:min-h-[350px]`}
+              >
+                <div class={tw`grid place-content-center md:cols-span-1`}>
+                  <img
+                    src={`/${project.name}.png`}
+                    width={300}
+                    class={tw`rounded-lg`}
+                  />
+                </div>
+                <div
+                  class={tw`md:cols-span-1 md:grid md:grid-cols-1 md:gap-4 md:place-content-center`}
+                >
+                  <h1 class={tw`text-center text-lg font-semibold`}>
+                    {project.name.replace(/-/g, " ")}
+                  </h1>
+                  <article class={tw`text-sm`}>
+                    &emsp;{project.description}
+                  </article>
+                  <p class={tw`text-sm`}>
+                    <b>Role:</b> {project.role}
+                  </p>
+                </div>
+                <div class={tw`grid grid-cols-1 gap-6 md:cols-span-1 md:gap-0`}>
+                  {project.project_url ? (
+                    <LinkButton
+                      props={{
+                        link: project.project_url,
+                        name: "Go to Site",
+                      }}
+                    />
+                  ) : null}
+                  <LinkButton
+                    props={{ link: project.github_url, name: "Github" }}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </section>
         {/** Single Resume */}
-        <section>Single Resume Button</section>
+        <section
+          class={tw`h-screen w-screen grid place-content-center bg-black`}
+        >
+          <a
+            href={"/FrancisT_Resume.pdf"}
+            class={tw`px-4 py-2 border-2 border-white text-white motion-safe:animate-pulse rounded-full hover:animate-none`}
+          >
+            Take a Resumé
+          </a>
+        </section>
       </main>
       {/** Footer */}
       <Footer />
     </>
+  );
+}
+function LinkButton({ props }: { props: { link: URL; name: string } }) {
+  return (
+    <div class={tw`grid place-content-center`}>
+      <a
+        class={tw`border-[3px] border-black rounded-lg text-center hover:bg-black hover:border-white hover:text-white w-24 py-3 text-sm font-bold shadow-lg`}
+        href={props.link.href}
+      >
+        {props.name}
+      </a>
+    </div>
   );
 }
