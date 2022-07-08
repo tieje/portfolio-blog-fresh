@@ -91,7 +91,7 @@ export function parseGitProject(data: any): GithubProjectInfo {
 curl -i -H "Authorization: token x" "https://api.github.com/users/tieje/repos?name"
 curl -H "Authorization: token x" "https://api.github.com/repos/tieje/breadsauce"
 curl -H "Authorization: token x" "https://api.github.com/repos/hellenic/react-hexgrid"
-curl -i -H "Authorization: token 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" "https://api.github.com/users/tieje/repos/hm"
+curl -i -H "Authorization: token " "https://api.github.com/users/tieje/repos/hm"
 */
 /* Github API will have a response for repos in the form of the following.
 {

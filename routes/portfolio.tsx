@@ -84,7 +84,7 @@ export default function Home(props: PageProps<MyInfoType>) {
         {/** Navigation */}
         <NavigationBar active="/portfolio" />
         {/** Header */}
-        <header class={tw`md:mb-32 w-screen grid place-content-center`}>
+        <header class={tw`md:mb-32 w-full grid place-content-center`}>
           <div
             class={tw`md:max-w-[900px] grid place-content-center md:grid-cols-2`}
           >
@@ -209,7 +209,7 @@ export default function Home(props: PageProps<MyInfoType>) {
         </section>
         {/** Single Resume */}
         <section
-          class={tw`h-screen w-screen grid place-content-center bg-black`}
+          class={tw`h-screen grid place-content-center bg-black`}
         >
           <a
             href={"/FrancisT_Resume.pdf"}
