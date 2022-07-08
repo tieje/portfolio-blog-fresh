@@ -121,9 +121,16 @@ export default function NavigationBar(props: NavBarPropsType) {
 }
 export function NavLogo({ props }: { props: LogoPropsType }) {
   return (
-    <a class={tw`${props.TwA}`} href={"/"}>
-      <img src="/logo.svg" height={60} width={60} class={tw`${props.TwImg}`} />
-    </a>
+    <div class={tw`${props.TwA}`}>
+      <a href={"/"}>
+        <img
+          src="/logo.svg"
+          height={60}
+          width={60}
+          class={tw`${props.TwImg}`}
+        />
+      </a>
+    </div>
   );
 }
 export function NavName({ props }: { props: NavNamePropsType }) {
