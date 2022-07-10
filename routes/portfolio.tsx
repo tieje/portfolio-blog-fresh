@@ -86,11 +86,11 @@ export default function Home(props: PageProps<MyInfoType>) {
         {/** Header */}
         <header class={tw`md:mb-32 w-full grid place-content-center`}>
           <div
-            class={tw`md:max-w-[900px] grid place-content-center md:grid-cols-2`}
+            class={tw`md:max-w-[900px] grid place-content-center md:grid-cols-12`}
           >
             {/** My immediate profile section */}
             <section
-              class={tw`my-10 px-5 py-5 grid gap-10 text-center md:flex md:justify-right md:content-center md:cols-span-1 md:px-10 md:m-0`}
+              class={tw`my-10 px-5 py-5 grid gap-10 text-center md:flex md:justify-right md:cols-span-1 md:m-0 md:col-span-5`}
             >
               {/** Github Image Avatar */}
               <div class={tw`grid grid-cols-1 gap-10 place-content-center`}>
@@ -119,15 +119,15 @@ export default function Home(props: PageProps<MyInfoType>) {
                   &emsp;<i>{props.data.bio}</i>
                 </p>
                 <article class={tw`grid gap-2 text-sm`}>
-                  <p class={tw`text-left font-semibold`}>
-                    &emsp;Where I am in my career:
+                  <p class={tw`font-semibold`}>
+                    Where I am in my career:
                   </p>
                   <p class={tw``}>Landing my first web dev job.</p>
                 </article>
               </div>
             </section>
             {/** My Tech Stack */}
-            <table class={tw`grid grid-cols-1 gap-8 md:cols-span-1 text-sm`}>
+            <table class={tw`grid grid-cols-1 gap-8 md:cols-span-1 text-sm md:col-span-7`}>
               <thead class={tw` grid place-content-center`}>
                 <tr>
                   <th class={tw`text-2xl`} colSpan={2}>
@@ -148,7 +148,7 @@ export default function Home(props: PageProps<MyInfoType>) {
                         {tech.tech.map((item: string) => {
                           return (
                             <button
-                              class={tw`border border-black rounded-full px-2 m-1 shadow-lg`}
+                              class={tw`border border-black rounded-full px-2 m-1 shadow-md`}
                             >
                               {item}
                             </button>
@@ -168,17 +168,30 @@ export default function Home(props: PageProps<MyInfoType>) {
           {props.data.projects.map((project: GithubProjectInfo) => {
             return (
               <div
-                class={tw`grid sm:grid-cols-1 md:grid-cols-3 my-10 gap-8 bg-yellow-100 px-7 py-5 mx-2 rounded-lg md:max-w-[900px] md:min-h-[350px]`}
+                class={tw`grid sm:grid-cols-1 md:grid-cols-12 my-10 gap-4 md:gap-4 bg-yellow-100 px-7 py-5 mx-2 rounded-lg md:max-w-[1000px] md:min-h-[350px]`}
               >
-                <div class={tw`grid place-content-center md:cols-span-1`}>
+                <div class={tw`grid place-content-center md:col-span-4 gap-4`}>
                   <img
                     src={`/${project.name}.png`}
                     width={300}
                     class={tw`rounded-lg`}
                   />
+                  <ol
+                    class={tw`flex flex-wrap md:grid md:place-content-center text-sm justify-center`}
+                  >
+                    {project.topics.map((tag: string) => {
+                      return (
+                        <li
+                          class={tw`border-2 border-black rounded-full px-2 m-1 shadow-lg`}
+                        >
+                          {tag}
+                        </li>
+                      );
+                    })}
+                  </ol>
                 </div>
                 <div
-                  class={tw`md:cols-span-1 md:grid md:grid-cols-1 md:gap-4 md:place-content-center`}
+                  class={tw`grid grid-cols-1 gap-4 md:cols-span-1 md:grid md:grid-cols-1 md:col-span-6 md:gap-4 md:place-content-center`}
                 >
                   <h1 class={tw`text-center text-lg font-semibold`}>
                     {project.name.replace(/-/g, " ")}
@@ -190,7 +203,9 @@ export default function Home(props: PageProps<MyInfoType>) {
                     <b>Role:</b> {project.role}
                   </p>
                 </div>
-                <div class={tw`grid grid-cols-1 gap-6 md:cols-span-1 md:gap-0`}>
+                <div
+                  class={tw`grid grid-cols-1 gap-6 md:col-span-2 md:place-content-center`}
+                >
                   {project.project_url ? (
                     <LinkButton
                       props={{
@@ -208,9 +223,7 @@ export default function Home(props: PageProps<MyInfoType>) {
           })}
         </section>
         {/** Single Resume */}
-        <section
-          class={tw`h-screen grid place-content-center bg-black`}
-        >
+        <section class={tw`h-screen grid place-content-center bg-black`}>
           <a
             href={"/FrancisT_Resume.pdf"}
             class={tw`px-4 py-2 border-2 border-white text-white motion-safe:animate-pulse rounded-full hover:animate-none`}

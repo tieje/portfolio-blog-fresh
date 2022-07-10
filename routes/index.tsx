@@ -25,10 +25,8 @@ export default function Home() {
         {/** Navigation */}
         <NavigationBar active="/" />
         {/** Header */}
-        <header
-          class={tw`flex flex-grow place-content-center`}
-        >
-          <h1 class={tw`text-6xl`}>UNDER CONSTRUCTION</h1>
+        <header class={tw`grid place-content-center`}>
+          <h1 class={tw`text-6xl`}>Page Under Construction</h1>
         </header>
       </main>
       <Footer />

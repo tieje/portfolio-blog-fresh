@@ -9,6 +9,22 @@
             "date_posted": "7/2/2022",
             "last_edited": "7/2/2022",
             "file": "testPost.md"
+        },
+        {
+            "title": "default",
+            "tags": [],
+            "href": "default",
+            "date_posted": "7/10/2022",
+            "last_edited": "7/10/2022",
+            "file": "default.md"
+        },
+        {
+            "title": "about-me",
+            "tags": [],
+            "href": "about-me",
+            "date_posted": "7/10/2022",
+            "last_edited": "7/10/2022",
+            "file": "about-me.md"
         }
     ]
 }

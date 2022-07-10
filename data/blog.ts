@@ -9,6 +9,6 @@ export interface BlogPost {
 }
 export const TABLE_OF_CONTENTS: Record<BlogPost["href"], BlogPost> = {};
 
-RAW_BLOG.posts.forEach((post: BlogPost) => {
+RAW_BLOG.posts.map((post: BlogPost) => {
   TABLE_OF_CONTENTS[post.href] = post;
 });

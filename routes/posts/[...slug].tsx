@@ -22,7 +22,7 @@ export const handler: Handlers<Data> = {
     if (slug === "") {
       return new Response("", {
         status: 307,
-        headers: { location: "/posts/test-post" },
+        headers: { location: "/posts/default" },
       });
     }
     const entry = TABLE_OF_CONTENTS[slug];
@@ -67,20 +67,27 @@ export default function BlogPostsPage(props: PageProps<Data>) {
         />
         {description && <meta name="description" content={description} />}
       </Head>
-      <main>
+      <main class={tw`min-h-screen bg-white`}>
         {/** Navigation */}
         <NavigationBar active="/posts" />
-
         {/** Header */}
-        {/** Navigation */}
-        {/** Body */}
-        <div
-          class={`${body} markdown-body`}
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-        {/** Footer */}
-        <Footer />
+        {/** Markdown */}
+        <section class={tw`px-5 grid place-content-center`}>
+          <div class={tw`md:w-[500px] text-sm`}>
+            <div>Posted: {props.data.page.date_posted}</div>
+            <div>Last Updated: {props.data.page.last_edited}</div>
+            <article
+              class={`${body} markdown-body`}
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          </div>
+        </section>
       </main>
+      {/** Footer */}
+      <Footer />
     </>
   );
 }
+/*
+
+*/
