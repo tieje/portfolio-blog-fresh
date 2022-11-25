@@ -5,10 +5,6 @@
             "date": "Sept. 2022"
         },
         {
-            "institution": "AWS Developer - Associate Certified",
-            "date": "Aug. 2022"
-        },
-        {
             "institution": "University of Connecticut (B.S. Chemistry)",
             "date": "2018"
         }
@@ -42,6 +38,7 @@
         {
             "category": "Backend(ish)",
             "tech": [
+                ".NET",
                 "Django + Django REST APIs",
                 "Express",
                 "GraphQL"
@@ -57,8 +54,9 @@
             ]
         },
         {
-            "category": "Deployment",
+            "category": "CI/CD",
             "tech": [
+                "Azure",
                 "AWS",
                 "Apache",
                 "Deno Deploy",
@@ -86,6 +84,7 @@
                 "PL/SQL",
                 "PostgreSQL",
                 "Python",
+                "Rust",
                 "TypeScript"
             ]
         }

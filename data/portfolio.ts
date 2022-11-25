@@ -11,7 +11,7 @@ export const LINKEDIN_URL = new URL(
 );
 export const PORTFOLIO_URL = new URL("https://thomasjamesfrancis.com/");
 export const RESUME_URL = new URL(
-  "https://1drv.ms/b/s!Audo5lI2bixcvdEL5FoZIfKpQFPPzw?e=agEqvG"
+  "https://1drv.ms/b/s!Audo5lI2bixcvdFDqluOgaM1XtHduw?e=yaVMmi"
 );
 
 export type TechCategory = {
@@ -65,6 +65,7 @@ const GITHUB_AUTH_HEADER: HeadersInit = {
 };
 export const GITHUB_AUTH: RequestInit = { headers: GITHUB_AUTH_HEADER };
 export const PORTFOLIO_REPOS = [
+  "tieje/tieje.github.io",
   "hellenic/react-hexgrid",
   "tieje/portfolio-blog-fresh",
   "tieje/breadsauce",
