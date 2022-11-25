@@ -38,8 +38,8 @@
         {
             "category": "Backend(ish)",
             "tech": [
-                ".NET",
                 "Django + Django REST APIs",
+                ".NET",
                 "Express",
                 "GraphQL"
             ]

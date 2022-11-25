@@ -122,7 +122,7 @@ export default function Home(props: PageProps<MyInfoType>) {
                   <p class={tw`font-semibold`}>
                     Where I am in my career:
                   </p>
-                  <p class={tw``}>Landing my first web dev job.</p>
+                  <p class={tw``}>Working at my first dev job. Learning Rust.</p>
                 </article>
               </div>
             </section>
