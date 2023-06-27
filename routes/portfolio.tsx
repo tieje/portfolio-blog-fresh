@@ -10,7 +10,6 @@ import {
   DEFAULT_GITHUB_AVATAR,
   DEFAULT_GITHUB_PROFILE,
   LINKEDIN_URL,
-  RESUME_URL,
   PORTFOLIO_URL,
   PORTFOLIO_REPOS,
   parseGitProject,
@@ -58,7 +57,6 @@ export const handler: Handlers<MyInfoType> = {
       bio: userData.bio ?? DEFAULT_BIO,
       name: userData.name ?? "Thomas Francis",
       LinkedIn: LINKEDIN_URL,
-      Resume: RESUME_URL,
       Portfolio: PORTFOLIO_URL,
       projects: gitProjects,
     };

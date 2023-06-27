@@ -5,14 +5,11 @@ export const DEFAULT_GITHUB_AVATAR = new URL(
 );
 export const DEFAULT_GITHUB_PROFILE = new URL("https://github.com/tieje");
 export const DEFAULT_BIO =
-  "Full stack web developer. Chemist. I care a lot about education systems.";
+  "Full stack web developer. Chemist.";
 export const LINKEDIN_URL = new URL(
   "https://www.linkedin.com/in/thomas-james-libiano-francis/"
 );
 export const PORTFOLIO_URL = new URL("https://thomasjamesfrancis.com/");
-export const RESUME_URL = new URL(
-  "https://1drv.ms/b/s!Audo5lI2bixcvdFDqluOgaM1XtHduw?e=yaVMmi"
-);
 
 export type TechCategory = {
   category:
@@ -48,7 +45,6 @@ export interface MyInfoType extends GithubUserInfo {
   education: Certification[];
   techStack: TechCategory[];
   LinkedIn: URL;
-  Resume: URL;
   Portfolio: URL;
   projects: GithubProjectInfo[];
 }
@@ -65,6 +61,7 @@ const GITHUB_AUTH_HEADER: HeadersInit = {
 };
 export const GITHUB_AUTH: RequestInit = { headers: GITHUB_AUTH_HEADER };
 export const PORTFOLIO_REPOS = [
+  "tieje/rs_sec_edgar",
   "tieje/tieje.github.io",
   "hellenic/react-hexgrid",
   "tieje/portfolio-blog-fresh",
