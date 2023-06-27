@@ -39,7 +39,7 @@ const navLinks: NavLinksType[] = [
   navHome,
   {
     name: "Resume",
-    href: "/FrancisT_Resume.pdf",
+    href: "/FrancisT_resume.pdf",
   },
   {
     name: "Blog",

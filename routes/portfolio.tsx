@@ -225,7 +225,7 @@ export default function Home(props: PageProps<MyInfoType>) {
         {/** Single Resume */}
         <section class={tw`h-screen grid place-content-center bg-black`}>
           <a
-            href={"/FrancisT_Resume.pdf"}
+            href={"/FrancisT_resume.pdf"}
             class={tw`px-4 py-2 border-2 border-white text-white motion-safe:animate-pulse rounded-full hover:animate-none`}
           >
             Take a Resumé
